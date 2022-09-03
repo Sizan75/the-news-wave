@@ -7,7 +7,7 @@ const loadCategories = () => {
 }
 //  display categories  name in li 
 const displayCategoryName = (categories) =>{
-    
+
     const categoriesUl =document.getElementById('catagories-ul');
     categories.forEach(category => {
         const categoryLi = document.createElement('li');
@@ -25,6 +25,7 @@ const displayCategoryName = (categories) =>{
 loadCategories();
 
 const showNewsFeed = (id) =>{
+    toggleSpinner(true);
     const url = `https://openapi.programming-hero.com/api/news/category/${id}`
     fetch(url)
     .then(res => res.json())
@@ -69,6 +70,7 @@ const displayNewsFeed = data =>{
         `
         newsFeedDiv.appendChild(cardDiv);
     });
+    toggleSpinner(false);
 }
 
 const  loadNewsDetails = news_id => {
@@ -88,4 +90,16 @@ const displayNewsDetails = news =>{
     <p>Publish Date: ${news[0].author.published_date ? news[0].author.published_date : "publish date not found"}</p>
     <h6>Total View: <i class="fa-sharp fa-solid fa-eye"></i> ${news[0].total_view ? news[0].total_view  : "No View Data Found"}M</h6>
     `
+}
+
+// for spinner 
+const toggleSpinner = isLoading => {
+    const spinner = document.getElementById('loader');
+    if(isLoading)
+    {
+        spinner.classList.remove('d-none');
+    }
+    else{
+        spinner.classList.add('d-none');
+    }
 }
