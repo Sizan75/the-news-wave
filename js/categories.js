@@ -4,6 +4,7 @@ const loadCategories = () => {
     fetch(url)
     .then(res => res.json())
     .then(data => displayCategoryName(data.data.news_category))
+    .catch( error => console.error('Error:', error))
 }
 //  display categories  name in li 
 const displayCategoryName = (categories) =>{
@@ -30,6 +31,7 @@ const showNewsFeed = (id) =>{
     fetch(url)
     .then(res => res.json())
     .then(data => displayNewsFeed(data.data))
+    .catch( error => console.error('Error:', error))
 }
 
 const displayNewsFeed = data =>{
@@ -48,10 +50,10 @@ const displayNewsFeed = data =>{
                     <img src="${news.thumbnail_url}" class="img-fluid rounded-start"  alt="...">
                   </div>
                   <div class="col-md-8">
-                    <div class="card-body">
+                    <div class="card-body ">
                       <h5 class="card-title">${news.title ? news.title: "Not Found"}</h5>
-                      <p class="card-text">${news.details.length > 300 ? news.details.slice(0,300) + '...' : news.details}</p>
-                      <div class="d-flex mt-3 justify-content-between me-4 align-items-center">
+                      <p class="card-text mt-3">${news.details.length > 300 ? news.details.slice(0,300) + '...' : news.details}</p>
+                      <div class="d-flex mt-5 justify-content-between me-4 align-items-center">
                       <div class="d-flex ">
                        <img src="${news.author.img ? news.author.img : "Author img not found"}" class="rounded-circle" alt="..." width="42" height="42">
                       <div >
@@ -78,6 +80,7 @@ const  loadNewsDetails = news_id => {
     fetch(url)
     .then(res => res.json())
     .then(data => displayNewsDetails(data.data))
+    .catch( error => console.error('Error:', error))
 }
 
 const displayNewsDetails = news =>{
