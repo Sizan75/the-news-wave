@@ -15,10 +15,20 @@ const displayCategoryName = (categories) =>{
         categoryLi.classList.add('ms-5');
         categoryLi.classList.add('fw-semibold');
         categoryLi.innerHTML = `
-        <a class="nav-link active fw-semibold" aria-current="page" id="${category.category_id}" href="#">${category.category_name}</a
+        <a class="nav-link active fw-semibold" aria-current="page" onclick="showNewsFeed('${category.category_id}')" >${category.category_name}</a
         `    
         categoriesUl.appendChild(categoryLi);    
     });
 }
-
+// calling loadCategories 
 loadCategories();
+
+const showNewsFeed = (id) =>{
+    const url = `https://openapi.programming-hero.com/api/news/category/${id}`
+    fetch(url)
+    .then(res => res.json())
+    .then(data => console.log(data))
+}
+
+
+
