@@ -57,7 +57,7 @@ const displayNewsFeed = data =>{
                       </div>
                 
                       <h6><i class="fa-sharp fa-solid fa-eye"></i> ${news.total_view ? news.total_view  : "No View"}M</h6>
-                      <button class="btn btn-primary " onclick="">Details</button>
+                      <button class="btn btn-primary " onclick="loadNewsDetails('${news._id}')" data-bs-toggle="modal" data-bs-target="#newsDetailsModal">Details</button>
                     </div>
                     </div>
                   </div>
@@ -68,3 +68,21 @@ const displayNewsFeed = data =>{
     });
 }
 
+const  loadNewsDetails = news_id => {
+    const url = `https://openapi.programming-hero.com/api/news/${news_id}`
+    fetch(url)
+    .then(res => res.json())
+    .then(data => displayNewsDetails(data.data))
+}
+
+const displayNewsDetails = news =>{
+    const newsTitle = document.getElementById('newsModalLabel');
+    newsTitle.innerText = news[0].title ;
+
+    const modalBody = document.getElementById('newsModalBody');
+    modalBody.innerHTML = `
+    <h6>Author: ${news[0].author.name ? news[0].author.name : "No aouthor name found"}</h6>
+    <p>Publish Date: ${news[0].author.published_date ? news[0].author.published_date : "publish date not found"}</p>
+    <h6>Total View: <i class="fa-sharp fa-solid fa-eye"></i> ${news[0].total_view ? news[0].total_view  : "No View Data Found"}M</h6>
+    `
+}
