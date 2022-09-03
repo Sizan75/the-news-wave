@@ -24,7 +24,7 @@ const displayCategoryName = (categories) =>{
 }
 // calling loadCategories 
 loadCategories();
-
+//  show News Using Card
 const showNewsFeed = (id) =>{
     toggleSpinner(true);
     const url = `https://openapi.programming-hero.com/api/news/category/${id}`
@@ -34,8 +34,13 @@ const showNewsFeed = (id) =>{
     .catch( error => console.error('Error:', error))
 }
 
+//  Display News Using Card
 const displayNewsFeed = data =>{
-    const totalItem = document.getElementById('total-news')
+    // sort by view count 
+    data.sort((a, b) =>{
+        return b.total_view - a.total_view
+    });
+       const totalItem = document.getElementById('total-news')
     totalItem.innerText = data.length;
     const newsFeedDiv = document.getElementById('news-feed');
     newsFeedDiv.innerHTML = ''
@@ -62,7 +67,7 @@ const displayNewsFeed = data =>{
                       </div>
                       </div>
                 
-                      <h6><i class="fa-sharp fa-solid fa-eye"></i> ${news.total_view ? news.total_view  : "No View"}M</h6>
+                      <h6><i class="fa-sharp fa-solid fa-eye"></i> ${news.total_view ? news.total_view  : "No View"}</h6>
                       <button class="btn btn-primary " onclick="loadNewsDetails('${news._id}')" data-bs-toggle="modal" data-bs-target="#newsDetailsModal">Details</button>
                     </div>
                     </div>
@@ -74,7 +79,7 @@ const displayNewsFeed = data =>{
     });
     toggleSpinner(false);
 }
-
+//  Load News Details for Modal 
 const  loadNewsDetails = news_id => {
     const url = `https://openapi.programming-hero.com/api/news/${news_id}`
     fetch(url)
@@ -83,6 +88,8 @@ const  loadNewsDetails = news_id => {
     .catch( error => console.error('Error:', error))
 }
 
+
+//  Display News Details Using Modal 
 const displayNewsDetails = news =>{
     const newsTitle = document.getElementById('newsModalLabel');
     newsTitle.innerText = news[0].title ;
