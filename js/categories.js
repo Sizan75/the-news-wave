@@ -50,7 +50,7 @@ const displayNewsFeed = data =>{
                   <div class="col-md-8">
                     <div class="card-body">
                       <h5 class="card-title">${news.title ? news.title: "Not Found"}</h5>
-                      <p class="card-text">${news.details ? news.details.slice(0,300) : "no news details found"}...</p>
+                      <p class="card-text">${news.details.length > 300 ? news.details.slice(0,300) + '...' : news.details}</p>
                       <div class="d-flex mt-3 justify-content-between me-4 align-items-center">
                       <div class="d-flex ">
                        <img src="${news.author.img ? news.author.img : "Author img not found"}" class="rounded-circle" alt="..." width="42" height="42">
