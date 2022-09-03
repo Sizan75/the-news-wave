@@ -51,10 +51,10 @@ const displayNewsFeed = data =>{
         cardDiv.innerHTML = `
         
                 <div class="row g-0">
-                  <div class="col-md-4">
+                  <div class="col-md-4 col-lg-3 col-sm-12">
                     <img src="${news.thumbnail_url}" class="img-fluid rounded-start"  alt="...">
                   </div>
-                  <div class="col-md-8">
+                  <div class="col-md-8 col-lg-9 col-sm-12">
                     <div class="card-body ">
                       <h5 class="card-title">${news.title ? news.title: "Not Found"}</h5>
                       <p class="card-text mt-3">${news.details.length > 300 ? news.details.slice(0,300) + '...' : news.details}</p>
@@ -96,9 +96,10 @@ const displayNewsDetails = news =>{
 
     const modalBody = document.getElementById('newsModalBody');
     modalBody.innerHTML = `
+    <img src="${news[0].image_url ? news[0].image_url : "No Image Found"}" class="img-fluid rounded-start"  alt="...">
     <h6>Author: ${news[0].author.name ? news[0].author.name : "No aouthor name found"}</h6>
     <p>Publish Date: ${news[0].author.published_date ? news[0].author.published_date : "publish date not found"}</p>
-    <h6>Total View: <i class="fa-sharp fa-solid fa-eye"></i> ${news[0].total_view ? news[0].total_view  : "No View Data Found"}M</h6>
+    <h6>Total View: <i class="fa-sharp fa-solid fa-eye"></i> ${news[0].total_view ? news[0].total_view  : "No View Data Found"}</h6>
     `
 }
 
@@ -113,3 +114,5 @@ const toggleSpinner = isLoading => {
         spinner.classList.add('d-none');
     }
 }
+// calling showNewsFeed for loading initial news card 
+showNewsFeed('08');
