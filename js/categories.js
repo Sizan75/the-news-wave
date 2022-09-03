@@ -7,6 +7,7 @@ const loadCategories = () => {
 }
 //  display categories  name in li 
 const displayCategoryName = (categories) =>{
+    
     const categoriesUl =document.getElementById('catagories-ul');
     categories.forEach(category => {
         const categoryLi = document.createElement('li');
@@ -31,6 +32,8 @@ const showNewsFeed = (id) =>{
 }
 
 const displayNewsFeed = data =>{
+    const totalItem = document.getElementById('total-news')
+    totalItem.innerText = data.length;
     const newsFeedDiv = document.getElementById('news-feed');
     newsFeedDiv.innerHTML = ''
     data.forEach(news => {
